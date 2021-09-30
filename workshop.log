@@ -1,0 +1,27 @@
+29.09.2021 12:23:55.042 [] [main] INFO  d.w.bookdemo.BookdemoApplication - Starting BookdemoApplication using Java 11.0.11 on dominiks-pro.lancom.todo42.de with PID 84407 (/Users/Dominik/Library/Mobile Documents/com~apple~CloudDocs/workshops.de/2021-10-DBsystel/bookdemo/target/classes started by Dominik in /Users/Dominik/Library/Mobile Documents/com~apple~CloudDocs/workshops.de/2021-10-DBsystel/bookdemo)
+29.09.2021 12:23:55.047 [] [main] DEBUG d.w.bookdemo.BookdemoApplication - Running with Spring Boot v2.5.5, Spring v5.3.10
+29.09.2021 12:23:55.047 [] [main] INFO  d.w.bookdemo.BookdemoApplication - The following profiles are active: prod
+29.09.2021 12:23:56.109 [] [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+29.09.2021 12:23:56.203 [] [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1097 ms
+29.09.2021 12:23:56.413 [] [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+29.09.2021 12:23:56.501 [] [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 2 mappings in 'requestMappingHandlerMapping'
+29.09.2021 12:23:56.531 [] [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+29.09.2021 12:23:56.540 [] [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+29.09.2021 12:23:56.623 [] [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+29.09.2021 12:23:56.642 [] [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+29.09.2021 12:23:56.662 [] [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
