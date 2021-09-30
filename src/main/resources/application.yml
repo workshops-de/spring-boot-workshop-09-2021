@@ -1,6 +1,13 @@
-
 logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %highlight(%48.48logger) - %msg%n"
   level:
     "[de.workshops.bookdemo]": debug
+    
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+  filter:
+    create: All tasks
