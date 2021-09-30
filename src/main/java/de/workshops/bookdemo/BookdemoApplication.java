@@ -11,7 +11,6 @@ public class BookdemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookdemoApplication.class, args);
-		log.debug("Hallo Welt");
 	}
 
 }
