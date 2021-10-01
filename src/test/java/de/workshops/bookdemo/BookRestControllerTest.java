@@ -1,5 +1,6 @@
 package de.workshops.bookdemo;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -19,8 +22,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.workshops.bookdemo.book.Book;
 import de.workshops.bookdemo.book.BookRestController;
+import io.restassured.RestAssured;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 class BookRestControllerTest {
 
@@ -32,6 +37,10 @@ class BookRestControllerTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	@LocalServerPort
+	int port;
+	
 
 	@Test
 	void test() {
@@ -64,6 +73,32 @@ class BookRestControllerTest {
 		Book[] books = objectMapper.readValue(jsonPayload, Book[].class);
 		assertEquals(3, books.length);
 		assertEquals("Clean Code", books[1].getTitle());
+	}
+	
+	@Test
+	void testWithRestAssuredMockMvc() {
+	        RestAssuredMockMvc.standaloneSetup(controller);
+	        RestAssuredMockMvc.given().
+	             log().all().
+	        when().
+	             get("/book").
+	        then().
+	             log().all().
+	             statusCode(200).
+	             body("author[0]", equalTo("Erich Gamma"));
+	}
+
+	@Test
+	void testWithRestAssuredRealHttp() {
+		RestAssured.given()
+			.port(port)
+			.log().all().
+		when().
+			get("/book").
+		then().
+			log().all().
+			statusCode(200).
+			body("author[0]", equalTo("Erich Gamma"));
 	}
 
 }
