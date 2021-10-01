@@ -42,9 +42,9 @@ public class BookRestController {
     }
     
     @PutMapping("/{isbn}")
-    public Book update(@RequestBody Book book, @PathVariable String isbn) {
+    public Book update(@RequestBody Book book, @PathVariable String isbn) throws BookException {
     	if (isbn.equals(book.getIsbn())) {
-    		return bookService.create(newBook);    		
+    		return bookService.create(book);    		
     	} else {
     		throw new BookException("Nicht erlaubt");
     	}
