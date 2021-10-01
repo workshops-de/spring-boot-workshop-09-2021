@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,20 @@ public class BookRestController {
     @PostMapping("/search")
     public List<Book>  search(@RequestBody BookSearchRequest request) {
     	return bookService.search(request);
+    }
 
+    @PostMapping()
+    public Book create(@RequestBody Book newBook) {
+    	return bookService.create(newBook);
+    }
+    
+    @PutMapping("/{isbn}")
+    public Book update(@RequestBody Book book, @PathVariable String isbn) {
+    	if (isbn.equals(book.getIsbn())) {
+    		return bookService.create(newBook);    		
+    	} else {
+    		throw new BookException("Nicht erlaubt");
+    	}
     }
     
 }

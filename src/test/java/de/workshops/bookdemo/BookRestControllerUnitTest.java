@@ -29,4 +29,6 @@ public class BookRestControllerUnitTest {
 		Mockito.when(service.loadAllBooks()).thenReturn(new ArrayList<>());
 		assertEquals(0, controller.getAllBooks().size());
 	}
+	
+	
 }

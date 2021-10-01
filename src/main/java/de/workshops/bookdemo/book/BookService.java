@@ -21,6 +21,10 @@ public class BookService {
 
 	public List<Book> search(BookSearchRequest request) {
 		return bookRepository.search(request);
+	}
+
+	public Book create(Book newBook) {
+		return bookRepository.save(newBook);
 	} 
 	    
 	    

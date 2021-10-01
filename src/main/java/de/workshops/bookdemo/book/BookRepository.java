@@ -1,6 +1,7 @@
 package de.workshops.bookdemo.book;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,8 @@ public class BookRepository {
 	    
     @PostConstruct
     public void init() throws Exception {
-        this.books = Arrays.asList(mapper.readValue(new File("target/classes/books.json"), Book[].class));
+        this.books = new ArrayList<>();
+        this.books.addAll(Arrays.asList(mapper.readValue(new File("target/classes/books.json"), Book[].class)));
     }
 
 	public List<Book> findAllBooks() {
@@ -50,6 +52,11 @@ public class BookRepository {
     private boolean hasAuthor(Book book, String author) {
         return book.getAuthor().contains(author);
     }
+
+	public Book save(Book newBook) {
+		this.books.add(newBook);
+		return newBook;
+	}
 
 
     
