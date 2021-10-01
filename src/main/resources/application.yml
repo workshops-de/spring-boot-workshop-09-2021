@@ -9,3 +9,5 @@ spring:
   thymeleaf:
     enabled: true
     suffix: .ty
+    
+myswagger: true
