@@ -1,13 +1,31 @@
+spring:
+  thymeleaf:
+    enabled: true
+    suffix: .ty
+
+  datasource:
+    url: jdbc:h2:mem:bookdemo
+    driver-class-name: org.h2.Driver
+    username: user
+    password: pass
+    
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+      
+
+  h2:
+    console:
+      enabled: true
+
 logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %highlight(%48.48logger) - %msg%n"
   level:
     "[de.workshops.bookdemo]": debug
     
-spring:
-  thymeleaf:
-    enabled: true
-    suffix: .ty
 
 myapp:
   param1: value
