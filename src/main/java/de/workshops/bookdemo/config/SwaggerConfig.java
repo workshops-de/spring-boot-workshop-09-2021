@@ -1,6 +1,5 @@
 package de.workshops.bookdemo.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,7 +12,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@ConditionalOnProperty(name = "myswagger", havingValue = "true")
 @Profile("!prod")
 public class SwaggerConfig {
 
