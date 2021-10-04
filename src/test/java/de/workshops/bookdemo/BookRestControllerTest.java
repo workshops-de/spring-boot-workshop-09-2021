@@ -24,11 +24,23 @@ import de.workshops.bookdemo.book.Book;
 import de.workshops.bookdemo.book.BookRestController;
 import io.restassured.RestAssured;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+@Slf4j
 class BookRestControllerTest {
 
+//	@TestConfiguration
+//    static class Config {
+//         @Bean
+//        public ObjectMapper mapper() {
+//            ObjectMapper mapper = new ObjectMapper();
+//            mapper = mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+//            return mapper;
+//           }
+//    }
+	
 	@Autowired
 	private BookRestController controller;
 
@@ -70,6 +82,7 @@ class BookRestControllerTest {
 		// @formatter:on
 
 		String jsonPayload = mvcResult.getResponse().getContentAsString();
+		log.debug(jsonPayload);
 		Book[] books = objectMapper.readValue(jsonPayload, Book[].class);
 		assertEquals(3, books.length);
 		assertEquals("Clean Code", books[1].getTitle());

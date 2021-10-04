@@ -1,0 +1,21 @@
+{"properties": [
+    {
+        "name": "myapp.param1",
+        "type": "java.lang.String",
+        "sourceType": "de.workshops.bookdemo.config.ApplicationConfig",
+        "description": "Das ist die Beschreibung"
+    },
+    {
+        "name": "myapp.param2",
+        "type": "java.lang.Integer",
+        "sourceType": "de.workshops.bookdemo.config.ApplicationConfig",
+        "description": "Das ist die int Beschreibung"
+    },
+    {
+        "name": "myapp.inner.innerParam1",
+        "type": "java.lang.String",
+        "sourceType": "de.workshops.bookdemo.config.ApplicationConfig",
+        "description": "Das ist die inner Beschreibung"
+    }
+]
+}

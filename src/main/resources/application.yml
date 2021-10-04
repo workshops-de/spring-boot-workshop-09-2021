@@ -8,7 +8,12 @@ spring:
   thymeleaf:
     enabled: true
     suffix: .ty
-    
+
+myapp:
+  param1: value
+  param2: 42
+  inner:
+    innerParam1: Test
 
 ---
 spring:
