@@ -16,8 +16,7 @@ public class BookService {
 	}
 
 	public Book loadBook(String isbn) {
-		// return bookRepository.findBookByIsbn(isbn);
-		return null;
+		return bookRepository.findByIsbn(isbn);
 	}
 
 	public List<Book> search(BookSearchRequest request) {
