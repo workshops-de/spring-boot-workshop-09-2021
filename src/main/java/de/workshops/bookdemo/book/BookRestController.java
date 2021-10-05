@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping(BookRestController.REQEST_URL)
+@Slf4j
 public class BookRestController {
  
 	public static final String REQEST_URL = "/book"; 
@@ -28,7 +31,7 @@ public class BookRestController {
 	
 	
     @GetMapping
-    public List<Book> getAllBooks() {
+    public Iterable<Book> getAllBooks() {
     	return bookService.loadAllBooks();
     }
     

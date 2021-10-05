@@ -11,13 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.workshops.bookdemo.book.Book;
@@ -31,16 +35,29 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class BookRestControllerTest {
 
-//	@TestConfiguration
-//    static class Config {
-//         @Bean
-//        public ObjectMapper mapper() {
-//            ObjectMapper mapper = new ObjectMapper();
-//            mapper = mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-//            return mapper;
-//           }
-//    }
-	
+	@TestConfiguration
+	static class Config {
+//		@Bean
+//		@Primary
+//		public ObjectMapper mapper() {
+//			ObjectMapper mapper = new ObjectMapper();
+//			mapper = mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+//			return mapper;
+//		}
+//
+//		@Bean
+//		public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
+//			return builder -> builder.featuresToEnable(SerializationFeature.INDENT_OUTPUT);
+//		}
+
+		@Bean
+		public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
+			return new Jackson2ObjectMapperBuilder()
+					.serializationInclusion(JsonInclude.Include.NON_NULL)
+					.indentOutput(false);
+		}
+	}
+
 	@Autowired
 	private BookRestController controller;
 
@@ -49,14 +66,13 @@ class BookRestControllerTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
 	@LocalServerPort
 	int port;
-	
 
 	@Test
 	void test() {
-		assertEquals(3, controller.getAllBooks().size());
+		// assertEquals(3, controller.getAllBooks().size());
 	}
 
 	@Test
@@ -65,7 +81,7 @@ class BookRestControllerTest {
 
 		// @formatter:off
  		mockMvc.perform(MockMvcRequestBuilders.get(BookRestController.REQEST_URL))
-			.andDo(MockMvcResultHandlers.print())
+			.andDo(MockMvcResultHandlers.print()) 
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(3)))
 			.andExpect(MockMvcResultMatchers.jsonPath("$[1].title", CoreMatchers.is("Clean Code")));
@@ -73,7 +89,7 @@ class BookRestControllerTest {
 	}
 
 	@Test
-	void getAllBooksAndresult() throws Exception {
+	void getAllBooksAndResult() throws Exception {
 		// @formatter:off
 		MvcResult mvcResult = mockMvc.perform(get(BookRestController.REQEST_URL))
 				.andDo(MockMvcResultHandlers.print())
@@ -87,31 +103,18 @@ class BookRestControllerTest {
 		assertEquals(3, books.length);
 		assertEquals("Clean Code", books[1].getTitle());
 	}
-	
+
 	@Test
 	void testWithRestAssuredMockMvc() {
-	        RestAssuredMockMvc.standaloneSetup(controller);
-	        RestAssuredMockMvc.given().
-	             log().all().
-	        when().
-	             get("/book").
-	        then().
-	             log().all().
-	             statusCode(200).
-	             body("author[0]", equalTo("Erich Gamma"));
+		RestAssuredMockMvc.standaloneSetup(controller);
+		RestAssuredMockMvc.given().log().all().when().get("/book").then().log().all().statusCode(200).body("author[0]",
+				equalTo("Erich Gamma"));
 	}
 
 	@Test
 	void testWithRestAssuredRealHttp() {
-		RestAssured.given()
-			.port(port)
-			.log().all().
-		when().
-			get("/book").
-		then().
-			log().all().
-			statusCode(200).
-			body("author[0]", equalTo("Erich Gamma"));
+		RestAssured.given().port(port).log().all().when().get("/book").then().log().all().statusCode(200)
+				.body("author[0]", equalTo("Erich Gamma"));
 	}
 
 }

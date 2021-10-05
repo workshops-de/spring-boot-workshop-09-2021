@@ -9,18 +9,20 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
 	@Autowired
-	private BookRepository bookRepository;
+	private BookRepositoryJpa bookRepository;
 
-	public List<Book> loadAllBooks() {
-		return bookRepository.findAllBooks();
+	public Iterable<Book> loadAllBooks() {
+		return bookRepository.findAll();
 	}
 
 	public Book loadBook(String isbn) {
-		return bookRepository.findBookByIsbn(isbn);
+		// return bookRepository.findBookByIsbn(isbn);
+		return null;
 	}
 
 	public List<Book> search(BookSearchRequest request) {
-		return bookRepository.search(request);
+		// return bookRepository.search(request);
+		return null;
 	}
 
 	public Book create(Book newBook) {
