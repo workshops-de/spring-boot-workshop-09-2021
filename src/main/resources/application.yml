@@ -4,7 +4,7 @@ spring:
     suffix: .ty
 
   datasource:
-    url: jdbc:h2:mem:bookdemo
+    url: jdbc:h2:./bookDB;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
     driver-class-name: org.h2.Driver
     username: user
     password: pass
@@ -15,10 +15,14 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
-      ddl-auto: create
-
+      ddl-auto: none
+  
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/changelog.xml
+    
   h2:
     console:
       enabled: true
@@ -30,6 +34,7 @@ logging:
     "[de.workshops.bookdemo]": debug
     "[org.hibernate.SQL]": debug
     "[org.hibernate.type]": trace
+    "[org.jooq]": debug
     
 
 myapp:

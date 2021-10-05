@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
 	@Autowired
-	private BookRepositoryJpa bookRepository;
+	private BookRepositoryJooq bookRepository;
 
 	public Iterable<Book> loadAllBooks() {
-		return bookRepository.findAll();
+		return null; //bookRepository.findAll();
 	}
 
-	public Book loadBook(String isbn) {
+	public de.workshops.bookdemo.generated.public_.tables.pojos.Book loadBook(String isbn) {
 		return bookRepository.findByIsbn(isbn);
 	}
 
@@ -25,7 +25,7 @@ public class BookService {
 	}
 
 	public Book create(Book newBook) {
-		return bookRepository.save(newBook);
+		return null; //bookRepository.save(newBook);
 	} 
 	    
 	    

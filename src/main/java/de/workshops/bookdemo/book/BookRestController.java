@@ -36,7 +36,7 @@ public class BookRestController {
     }
     
     @GetMapping("/{isbn}")
-    public Book getSingleBooks(@PathVariable String isbn) {
+    public de.workshops.bookdemo.generated.public_.tables.pojos.Book getSingleBooks(@PathVariable String isbn) {
     	return bookService.loadBook(isbn);
     }
     
