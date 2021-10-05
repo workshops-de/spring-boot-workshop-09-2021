@@ -1,0 +1,6 @@
+#FileLock
+#Tue Oct 05 12:40:14 CEST 2021
+server=127.94.0.1\:65112
+hostName=client.openvpn.net
+method=file
+id=17c500a22fd1082e45d1351f00e99d673c2380e0532
