@@ -3,11 +3,11 @@ spring:
     enabled: true
     suffix: .ty
 
-  datasource:
-    url: jdbc:h2:./bookDB;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
-    driver-class-name: org.h2.Driver
-    username: user
-    password: pass
+  #datasource:
+  #  url: jdbc:h2:./bookDB;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+  #  driver-class-name: org.h2.Driver
+  #  username: user
+  #  password: pass
     
   sql:
     init:
@@ -35,13 +35,28 @@ logging:
     "[org.hibernate.SQL]": debug
     "[org.hibernate.type]": trace
     "[org.jooq]": debug
-    
 
 myapp:
   param1: value
   param2: 42
   inner:
     innerParam1: Test
+
+app:
+  datasource:
+    first:
+      url: "jdbc:h2:mem:db1"
+      username: "dbuser"
+      password: "dbpass"
+      configuration:
+        maximum-pool-size: 30
+
+    second:
+      url: "jdbc:h2:mem:db2"
+      username: "dbuser"
+      password: "dbpass"
+      
+
 
 ---
 spring:
