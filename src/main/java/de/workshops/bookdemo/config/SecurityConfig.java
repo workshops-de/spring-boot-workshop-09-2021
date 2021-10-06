@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 							.where(USERS.USERNAME.eq(username))
 							.execute();
 						response.setStatus(HttpStatus.FOUND.value());
-						response.setHeader("Location", "http://localhost:8080/booklist2");
+						response.setHeader("Location", "/booklist");
 					}
 				})
 			.and()
