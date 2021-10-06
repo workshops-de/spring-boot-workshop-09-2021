@@ -166,7 +166,7 @@
 					</jdbc>
 					<generator>
 						<database>
-							<inputSchema></inputSchema>
+							<inputSchema>PUBLIC</inputSchema>
 							<includes></includes>
 							<excludes>Databasechangelog.*</excludes>
 						</database>

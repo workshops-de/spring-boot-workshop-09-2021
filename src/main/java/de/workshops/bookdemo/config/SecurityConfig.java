@@ -1,6 +1,6 @@
 package de.workshops.bookdemo.config;
 
-import static de.workshops.bookdemo.generated.public_.Tables.USERS;
+import static de.workshops.bookdemo.generated.Tables.USERS;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ import org.jooq.DSLContext;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -56,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.formLogin()
-				.defaultSuccessUrl("/booklist")
 				.successHandler(new AuthenticationSuccessHandler() {
 					
 					@Override
@@ -68,8 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 							.set(USERS.LASTLOGIN, LocalDateTime.now())
 							.where(USERS.USERNAME.eq(username))
 							.execute();
+						response.setStatus(HttpStatus.FOUND.value());
+						response.setHeader("Location", "http://localhost:8080/booklist2");
 					}
-				});
+				})
+			.and()
+			.authorizeRequests().anyRequest().authenticated()
+			.and()
+			.csrf().disable();
 	}
 
 	@Override

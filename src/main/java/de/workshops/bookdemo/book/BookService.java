@@ -15,7 +15,7 @@ public class BookService {
 		return null; //bookRepository.findAll();
 	}
 
-	public de.workshops.bookdemo.generated.public_.tables.pojos.Book loadBook(String isbn) {
+	public de.workshops.bookdemo.generated.tables.pojos.Book loadBook(String isbn) {
 		return bookRepository.findByIsbn(isbn);
 	}
 
