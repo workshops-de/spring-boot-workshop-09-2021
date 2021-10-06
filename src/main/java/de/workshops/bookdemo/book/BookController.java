@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
-@RequestMapping("/booklist")
+@RequestMapping("/")
 public class BookController {
 
 	private List<Book> books;

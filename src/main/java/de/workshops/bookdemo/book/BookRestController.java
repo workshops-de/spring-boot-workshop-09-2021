@@ -31,7 +31,7 @@ public class BookRestController {
 	
 	
     @GetMapping
-    public Iterable<Book> getAllBooks() {
+    public List<de.workshops.bookdemo.generated.tables.pojos.Book> getAllBooks() {
     	return bookService.loadAllBooks();
     }
     

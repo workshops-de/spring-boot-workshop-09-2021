@@ -11,8 +11,8 @@ public class BookService {
 	@Autowired
 	private BookRepositoryJooq bookRepository;
 
-	public Iterable<Book> loadAllBooks() {
-		return null; //bookRepository.findAll();
+	public List<de.workshops.bookdemo.generated.tables.pojos.Book> loadAllBooks() {
+		return bookRepository.findAll();
 	}
 
 	public de.workshops.bookdemo.generated.tables.pojos.Book loadBook(String isbn) {

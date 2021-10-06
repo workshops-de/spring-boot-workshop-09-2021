@@ -56,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.httpBasic()
+			.and()
 			.formLogin()
 				.successHandler(new AuthenticationSuccessHandler() {
 					
@@ -73,15 +75,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					}
 				})
 			.and()
+			.oauth2Login()
+			.and()
 			.authorizeRequests().anyRequest().authenticated()
 			.and()
+			
 			.csrf().disable();
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-			.antMatchers("/h2-console/**");
+			.antMatchers("/h2-console/**")
+			.antMatchers("/actuator/**");
 		
 	}
 	

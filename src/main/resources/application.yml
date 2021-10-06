@@ -40,6 +40,32 @@ spring:
             client-id: 148971885543-co9dv22tjamh7amdonnqod69dsd721rp.apps.googleusercontent.com
             client-secret: mXAtT6Ze7M7mK_KCb5VEyJSY       
 
+  boot:
+    admin:
+      client:
+        enabled: true
+        url: http://localhost:8888
+        username: todo42
+        password: v9K43$8q704$uXLc
+        instance:
+          name: bookdemo
+          management-base-url: http://localhost:8080
+          service-base-url: http://localhost:8080
+          metadata:
+            user.name: alice
+            user.password: pass
+
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+    jmx:
+      exposure:
+        include: "*"
+
       
 logging:
   pattern:
