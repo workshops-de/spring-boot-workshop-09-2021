@@ -31,10 +31,19 @@ spring:
     user:
       name: user
       password: pass 
+
+    oauth2:
+      client:
+        registration:
+          google:
+            # client mit redirect-uri *:8080 und *:8081
+            client-id: 148971885543-co9dv22tjamh7amdonnqod69dsd721rp.apps.googleusercontent.com
+            client-secret: mXAtT6Ze7M7mK_KCb5VEyJSY       
+
       
 logging:
   pattern:
-    console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %highlight(%48.48logger) - %msg%n"
+    console: "%d{HH:mm:ss.SSS} [%X{username}] %highlight(%-5level) %highlight(%48.48logger) - %msg%n"
   level:
     "[de.workshops.bookdemo]": debug
     "[org.hibernate.SQL]": info
